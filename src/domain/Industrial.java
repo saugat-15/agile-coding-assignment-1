@@ -11,22 +11,62 @@ public class Industrial extends Property {
 
 	private String hazardStatus;
 	private String heavyVehicleStatus;
+	private static final double CIV_RATE = 0.004;
+	private static final int INDUSTRIAL_WASTE_DISPOSAL_UNITS = 4;
+	private static final double INDUSTRIAL_WASTE_DISPOSAL_FEES = 600.00;
+	private static final double FIRE_SERVICES_BASE = 200;
+	private static final double FIRE_SERVICES_PERCENT = 0.00007;
+	private ServiceType industrialWasteDisposal;
+	private ServiceType fireServicesLevy;
+	
 	
 	public Industrial() {
-		System.out.println("Not implemented yet");
+		this.setHazardStatus("Biological");
+		this.setHeavyVehicleStatus("Parked");
+		setCapitalImprovedRate(CIV_RATE);
 	}
 
+	public String getHazardStatus() {
+		return hazardStatus;
+	}
+
+	public void setHazardStatus(String hazardStatus) {
+		this.hazardStatus = hazardStatus;
+	}
+
+	public String getHeavyVehicleStatus() {
+		return heavyVehicleStatus;
+	}
+
+	public void setHeavyVehicleStatus(String heavyVehicleStatus) {
+		this.heavyVehicleStatus = heavyVehicleStatus;
+	}
+	
 	@Override
 	public double calculateExtraServices() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		return industrialWasteDisposal.calculateChargeForServiceType() +
+				   fireServicesLevy.calculateChargeForServiceType();
+		}
+
 
 	@Override
 	public void setUpExtraServices() {
-		// TODO Auto-generated method stub
+		industrialWasteDisposal = new UnitAndRateService("Industrial Waste Disposal",
+				  INDUSTRIAL_WASTE_DISPOSAL_UNITS,
+				  INDUSTRIAL_WASTE_DISPOSAL_FEES);
+		fireServicesLevy = new BaseAndPercentageOfValueService("Fire Levy",
+																FIRE_SERVICES_BASE,
+																FIRE_SERVICES_PERCENT,
+																getCapitalImprovedValue());
+	}
+	
+	@Override
+	public String toString() {
+		return  super.toString() + "Industrial [\n" + 
+									industrialWasteDisposal.toString() + "\n" +
+									fireServicesLevy.toString() + " ]\n ";
+	}
 		
 	}
 
 	
-}
