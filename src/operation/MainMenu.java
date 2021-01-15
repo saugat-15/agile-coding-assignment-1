@@ -76,6 +76,7 @@ public class MainMenu {
 		switch (choice)
 		{
 			case 1:
+				
 				fd = new AddRatePayer(console); // we pass the console as a compromise; we want to avoid system resource issues in Eclipse
 				break;
 			case 2:
