@@ -2,6 +2,8 @@ package operation;
 
 import java.util.Scanner;
 
+import domain.RatePayer;
+
 import java.lang.String;
 /**
  * @author TAKeogh
@@ -12,29 +14,25 @@ import java.lang.String;
 
 public class AddRatePayer extends FunctionalDialog {
 	
-	private String name;
-	private String postalAddress;
-	private int postcode;
-	private int telephone;
-	private String type;
 	
+	
+	RatePayer ratePayer = new RatePayer();
 	
 	public AddRatePayer(Scanner console) {
 		super(1, console);
 		
 		System.out.print("Enter rate player's name");
-		name = console.nextLine();
+		ratePayer.setName(console.nextLine());
 		System.out.print("Enter rate player's postal address");
-		postalAddress = console.nextLine();
+		ratePayer.setAddress(console.nextLine());
 		System.out.print("Enter rate player's postcode");
-		postcode = Integer.parseInt(console.nextLine());
+		ratePayer.setPostcode(console.nextLine());
 		System.out.print("Enter rate player's telephone number");
-		telephone = Integer.parseInt(console.nextLine());
+		ratePayer.setPhone(console.nextLine());
 		System.out.print("Enter rate player's company type");
-		type = console.nextLine();
+		ratePayer.setType(console.nextLine());
 		
-	
-	    
+
 	}
 
 	@Override
@@ -47,29 +45,6 @@ public class AddRatePayer extends FunctionalDialog {
 	public void respondToInput() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public String getName() {
-		return name;
-	}
-
-
-	public String getPostalAddress() {
-		return postalAddress;
-	}
-
-
-	public int getPostcode() {
-		return postcode;
-	}
-
-	public int getTelephone() {
-		return telephone;
-	}
-
-
-	public String getType() {
-		return type;
 	}
 
 

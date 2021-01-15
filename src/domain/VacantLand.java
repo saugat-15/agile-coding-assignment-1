@@ -10,6 +10,7 @@ package domain;
 public class VacantLand extends Property{
 
 	private String[] overlays;
+	private int count= 0;
 	private static final double CIV_RATE= 0.010;
 	private static final double FIRE_SERVICES_BASE = 50.00;
 	private static final double FIRE_SERVICES_PERCENT = 0.00007;
@@ -24,8 +25,9 @@ public class VacantLand extends Property{
 		return overlays;
 	}
 	
-	public void setOverlays(String[] overlays) {
-		this.overlays = overlays;
+	public void setOverlays(String overlays) {
+		this.overlays[count] = overlays;
+		count++;
 	}
 	
 	@Override
