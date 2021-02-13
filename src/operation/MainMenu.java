@@ -97,6 +97,8 @@ public class MainMenu {
 		if(fd != null) {
 			fd.setTitle(SYSTEM_TITLE + "\n" + fd.getClass().getSimpleName() + "\n");
 			fd.operateDialog();
+			
+			//test commit
 		}	
 	}
 
