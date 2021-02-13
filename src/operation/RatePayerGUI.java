@@ -23,8 +23,11 @@ public class RatePayerGUI implements ActionListener,
 	        jcbTML,jcbEmpty, jcbCS;
 	private JButton jbCalc;
 
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		new RatePayerGUI();
 		//System.out.println("Running"); // Ok
 
@@ -57,6 +60,8 @@ public class RatePayerGUI implements ActionListener,
                 "School/Community",
                 "Other"};
 		jcPTypes = new JComboBox( s1 );
+		
+		
 		jlCIV = new JLabel ("CIV Rate");
 		jtfCIV = new JTextField (8);
 		jtfCIV.setText( "0.39%" ); // for residential
@@ -64,6 +69,7 @@ public class RatePayerGUI implements ActionListener,
 		jp.add(jcPTypes);   
 		jp.add(jlCIV);   
 		jp.add(jtfCIV); 
+		
 		
 		return jp;
 	}
@@ -82,6 +88,8 @@ public class RatePayerGUI implements ActionListener,
 		jp.add(jbCalc);
 		return jp;
 	}
+	
+	
 	private JPanel setupResultsPanel(){
 		JPanel jp  = new JPanel ();
 		jlResults = new JLabel ("Rate charged");
@@ -97,7 +105,52 @@ public class RatePayerGUI implements ActionListener,
         if(ae.getSource() == jbCalc) {
         	//Person p =  list.getSelectedValue();
            // p.display();
-        	RatePayerGUI mywindow = new RatePayerGUI();
+        	double result;
+        	int waste = 400;
+        	int greenw = 90;
+        	
+        	String s = (String)jcPTypes.getSelectedItem();
+        	double res = Double.parseDouble(jtfPropValue.getText());
+        	
+        	
+        	if(s == "Residential") {
+        		
+        		result = (res * 0.39/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        	}else if(s == "Commercial") {
+        		result = (res * 0.59/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        		
+        	}else if(s == "Vacant Land") {
+        		result = (res * 0.10/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        	}else if(s == "Hospital") {
+        		result = (res * 0.36/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        	}else if(s == "Industrial") {
+        		result = (res * 0.65/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        	}else if(s == "School/Community" ) {
+        		result = (res * 0.30/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        	}     		
+        	else if(s == "Other") {
+        		result = (res * 0.25/100 ) + waste + greenw + (110 + (0.007/100 * res));
+        		
+        	}else {
+        		return;
+        	}
+        	
+        	if(jcbCS.isSelected()) {
+        		result = result - (0.2 * result);
+        	}
+        	
+        	jtfResults.setText(Double.toString(result));
+        	
+        	
+        	
+        	
+        	
         }
 	}
 	
